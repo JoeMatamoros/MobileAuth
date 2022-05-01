@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
-import { render } from "react-dom";
-import { View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 //icons
 import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
 //formik
@@ -10,7 +9,6 @@ import { Formik } from 'formik';
 import { 
   StyledContainer,
   InnerContainer,
-  PageLogo,
   PageTitle,
   SubTitle,
   StyledFormArea, 
@@ -31,16 +29,41 @@ import {
 
 
 const {brand, darkLight, primary}= Colors
+import DateTimePicker from '@react-native-community/datetimepicker';
  
 const Signup = () =>{
 
-  const [hidePassword, setHidePassword]=useState(true);
+  const [hidePassword, setHidePassword] = useState(true);
+  const [show, setShow] = useState(false);
+  const [date, setDate]= useState(new Date(2000,0,1));
+  //Actual idk what
+  const [dob, setDob] = useState();
+
+  const onChange = (event,selectedDate)=>{
+        const currentDate = selectedDate || date;
+        setShow(false);
+        setDate(currentDate);
+        setDob(currentDate);
+  }
+
+  const showDatePicker = () =>{
+      setShow(true);
+  }
  return(
     <StyledContainer>
         <InnerContainer>
           <StatusBar style='dark'/>
           <PageTitle>Register</PageTitle>
           <SubTitle>Account Signup</SubTitle>
+          {show && (
+                <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode='date'
+                is24Hour={true}
+                onChange={onChange}
+                />
+         )}
           <Formik initialValues={{fullName:'',email:'',dateOfBirth:'', password:'',confirmPassword:''}} onSubmit={(values)=>{ console.log(values);}}
           >{({handleChange, handleBlur, handleSubmit, values})=>(
           <StyledFormArea>
@@ -70,7 +93,10 @@ const Signup = () =>{
                 placeholderTextColor={darkLight}
                 onChangeText={handleChange('dateOfBirth')}
                 onBlur={handleBlur('dateOfBirth')}
-                value={values.dateOfBirth}
+                value={dob ? dob.toDateString():''}
+                isDate={true}
+                editable={false}
+                showDatePicker={showDatePicker}
               />
               <MyTextInput
                 label='Password'
@@ -118,14 +144,17 @@ const Signup = () =>{
   
     
 }
-const MyTextInput = ({label, icon,isPassword,hidePassword,setHidePassword,...props}) =>{
+const MyTextInput = ({label, icon,isPassword,hidePassword,setHidePassword,isDate,showDatePicker,...props}) =>{
   return(
     <View>
       <LeftIcon>
         <Octicons name={icon} size={30} color={brand}/>
       </LeftIcon>
       <StyledInputLabel>{label}</StyledInputLabel>
-      <StyledTextInput {...props}/>
+     {!isDate && <StyledTextInput {...props}/>}
+     {isDate && <TouchableOpacity onPress={showDatePicker}>
+        <StyledTextInput {...props}/>
+         </TouchableOpacity>}
        {isPassword && (
          <RightIcon onPress={()=>setHidePassword(!hidePassword)}>
            <Ionicons name={hidePassword ? 'md-eye-off': 'md-eye'} size={30} color={darkLight}/>
