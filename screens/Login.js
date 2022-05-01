@@ -74,14 +74,14 @@ const Login = () =>{
             </StyledButton>
             <Line/>
             <StyledButton google={true} onPress={handleSubmit}>
-              <Fontisto name='google' size={25} color={primary}/>
-              <ButtonText google={true}>   Sign in with Google</ButtonText>
+                <Fontisto name='google' size={25} color={primary}/>
+                <ButtonText google={true}>   Sign in with Google</ButtonText>
             </StyledButton>
             <ExtraView>
-              <ExtraText>Don't have an account already?</ExtraText>
-              <TextLink>
-                <TextLinkContent> Signup</TextLinkContent>
-              </TextLink>
+                <ExtraText>Don't have an account already?</ExtraText>
+                <TextLink>
+                  <TextLinkContent> Signup</TextLinkContent>
+                </TextLink>
             </ExtraView>
           </StyledFormArea>
           )}
