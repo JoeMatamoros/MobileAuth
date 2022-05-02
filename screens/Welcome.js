@@ -11,7 +11,7 @@ import {
   WelcomeImage,
   Avatar
  } from '../components/styles'; 
-const Welcome = () =>{
+const Welcome = ({navigation}) =>{
  return(
     <>
      <StatusBar style='light'/>
@@ -23,7 +23,7 @@ const Welcome = () =>{
             <SubTitle welcome={true}>YourEmailHere@gmail.com</SubTitle>
             <StyledFormArea>
               <Avatar source={require('../img/pps.jpg')}/>
-                <StyledButton onPress={()=>{}}>
+                <StyledButton onPress={()=>{navigation.navigate('Login')}}>
                   <ButtonText>Logout</ButtonText>
                 </StyledButton>
             </StyledFormArea>

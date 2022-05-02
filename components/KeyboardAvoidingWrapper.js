@@ -1,7 +1,7 @@
 import React from "react";
 import { KeyboardAvoidingView, ScrollView, TouchableWithoutFeedback, Keyboard } from "react-native";
 
-const keyboardAvoidingWrapper = ({children})=>{
+const keyboardAvoidingWrapper = ({children}) => {
 
     return(
         <KeyboardAvoidingView style={{flex:1}}>

@@ -32,7 +32,7 @@ import {
 const {brand, darkLight, primary}= Colors
 
  
-const Signup = () =>{
+const Signup = ({navigation}) =>{
 
   const [hidePassword, setHidePassword] = useState(true);
   const [show, setShow] = useState(false);
@@ -67,7 +67,10 @@ const Signup = () =>{
                 />
          )}
           <Formik initialValues={{fullName:'',email:'',dateOfBirth:'', password:'',confirmPassword:''}} 
-            onSubmit={(values)=>{ console.log(values);}}
+            onSubmit={(values)=>{ 
+             console.log(values);
+             navigation.navigate("Welcome");
+            }}
           >{({handleChange, handleBlur, handleSubmit, values})=>(
           <StyledFormArea>
               <MyTextInput
@@ -134,7 +137,7 @@ const Signup = () =>{
             <Line/>
             <ExtraView>
                 <ExtraText>Already have an account?</ExtraText>
-                <TextLink>
+                <TextLink onPress={()=>navigation.navigate('Login')}>
                   <TextLinkContent> Login</TextLinkContent>
                 </TextLink>
             </ExtraView>

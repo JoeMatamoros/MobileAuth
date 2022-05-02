@@ -6,9 +6,12 @@ import Login from './screens/Login';
 import Signup from './screens/Singup';
 import Welcome from './screens/Welcome';
 
+//
+import RootStack from './navigators/RootStack';
+
 
 export default function App() {
-  return <Signup/>; 
+  return <RootStack/>; 
   
 }
 
