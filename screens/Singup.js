@@ -5,7 +5,8 @@ import { View, TouchableOpacity } from 'react-native';
 import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
 //formik
 import { Formik } from 'formik';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import { 
   StyledContainer,
   InnerContainer,
@@ -29,7 +30,7 @@ import {
 
 
 const {brand, darkLight, primary}= Colors
-import DateTimePicker from '@react-native-community/datetimepicker';
+
  
 const Signup = () =>{
 
@@ -50,7 +51,8 @@ const Signup = () =>{
       setShow(true);
   }
  return(
-    <StyledContainer>
+    <KeyboardAvoidingWrapper>
+      <StyledContainer>
         <InnerContainer>
           <StatusBar style='dark'/>
           <PageTitle>Register</PageTitle>
@@ -64,7 +66,8 @@ const Signup = () =>{
                 onChange={onChange}
                 />
          )}
-          <Formik initialValues={{fullName:'',email:'',dateOfBirth:'', password:'',confirmPassword:''}} onSubmit={(values)=>{ console.log(values);}}
+          <Formik initialValues={{fullName:'',email:'',dateOfBirth:'', password:'',confirmPassword:''}} 
+            onSubmit={(values)=>{ console.log(values);}}
           >{({handleChange, handleBlur, handleSubmit, values})=>(
           <StyledFormArea>
               <MyTextInput
@@ -139,12 +142,13 @@ const Signup = () =>{
           )}
           </Formik>
         </InnerContainer>
-    </StyledContainer>
+      </StyledContainer>
+    </KeyboardAvoidingWrapper>
  );
   
     
 }
-const MyTextInput = ({label, icon,isPassword,hidePassword,setHidePassword,isDate,showDatePicker,...props}) =>{
+const MyTextInput = ({label,icon,isPassword,hidePassword,setHidePassword,isDate,showDatePicker,...props}) =>{
   return(
     <View>
       <LeftIcon>

@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{useState} from 'react';
 import { render } from "react-dom";
-import { View } from 'react-native';
+import { View, KeyboardAvoidingView } from 'react-native';
 //icons
 import {Octicons, Ionicons, Fontisto} from '@expo/vector-icons';
 //formik
 import { Formik } from 'formik';
-
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 import { 
   StyledContainer,
   InnerContainer,
@@ -30,16 +30,18 @@ import {
  } from '../components/styles';
 
 
+
 const {brand, darkLight, primary}= Colors
  
 const Login = () =>{
 
   const [hidePassword, setHidePassword]=useState(true);
  return(
-    <StyledContainer>
+    <KeyboardAvoidingWrapper>
+      <StyledContainer>
         <InnerContainer>
           <StatusBar style='dark'/>
-          <PageLogo source={require('../img/pps.jpg')}/>
+          <PageLogo source={require('../img/undraw.png')}/>
           <PageTitle>Inicio</PageTitle>
           <SubTitle>Account Login</SubTitle>
           <Formik initialValues={{email:'', password:''}} onSubmit={(values)=>{ console.log(values);}}
@@ -87,12 +89,13 @@ const Login = () =>{
           )}
           </Formik>
         </InnerContainer>
-    </StyledContainer>
+      </StyledContainer>
+    </KeyboardAvoidingWrapper>
  );
   
     
 }
-const MyTextInput = ({label, icon,isPassword,hidePassword,setHidePassword,...props}) =>{
+const MyTextInput = ({label,icon,isPassword,hidePassword,setHidePassword,...props}) =>{
   return(
     <View>
       <LeftIcon>
